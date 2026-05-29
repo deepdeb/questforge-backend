@@ -1,0 +1,76 @@
+# =====================================
+# Virtual Environment
+# =====================================
+venv/
+.venv/
+env/
+ENV/
+
+# =====================================
+# Python
+# =====================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+
+# =====================================
+# Environment Variables & Secrets
+# =====================================
+.env
+.env.local
+.env.*.local
+
+# =====================================
+# Database & Data
+# =====================================
+*.db
+*.sqlite3
+*.sqlite
+*.sql
+
+# =====================================
+# Alembic Migrations
+# =====================================
+migrations/versions/__pycache__/
+# Do NOT ignore the migrations folder itself
+
+# =====================================
+# Logs
+# =====================================
+*.log
+logs/
+log/
+
+# =====================================
+# IDE / Editor files
+# =====================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# =====================================
+# Testing & Coverage
+# =====================================
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+.cache/
+
+# =====================================
+# Temporary / Build files
+# =====================================
+tmp/
+temp/
+build/
+dist/
