@@ -10,3 +10,4 @@ class PlayerProgress(Base):
     xp = Column(Integer, default=0)
     quests_completed = Column(Integer, default=0)
     total_xp_earned = Column(Integer, default=0)
+    achievements_unlocked = Column(Integer, default=0)
