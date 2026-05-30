@@ -1,26 +1,21 @@
 ================================================================
 Directory Structure
 ================================================================
-app/
-  api/
-    achievements.py
-    player.py
-  core/
-    config.py
-    database.py
-  models/
-    achievement.py
-    player.py
-  schemas/
-    achievement.py
-    player.py
-  main.py
-migrations/
-  versions/
-    983ca693fd2c_add_achievements_unlocked_to_player_.py
-  env.py
-  README
-  script.py.mako
+app/api/achievements.py
+app/api/player.py
+app/core/config.py
+app/core/database.py
+app/models/achievement.py
+app/models/player.py
+app/schemas/achievement.py
+app/schemas/player.py
+app/main.py
+
+migrations/versions/983ca693fd2c_add_achievements_unlocked_to_player_.py
+migrations/env.py
+migrations/README
+migrations/script.py.mako
+
 .gitignore
 alembic.ini
 run.py
@@ -407,11 +402,6 @@ else:
     run_migrations_online()
 
 ================
-File: migrations/README
-================
-Generic single-database configuration.
-
-================
 File: migrations/script.py.mako
 ================
 """${message}
@@ -487,41 +477,6 @@ __pycache__/
 migrations/versions/__pycache__/
 # Do NOT ignore the migrations folder itself
 
-# =====================================
-# Logs
-# =====================================
-*.log
-logs/
-log/
-
-# =====================================
-# IDE / Editor files
-# =====================================
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-
-# =====================================
-# Testing & Coverage
-# =====================================
-.coverage
-htmlcov/
-.pytest_cache/
-.tox/
-.nox/
-.cache/
-
-# =====================================
-# Temporary / Build files
-# =====================================
-tmp/
-temp/
-build/
-dist/
 
 ================
 File: alembic.ini
