@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class PlayerProgressBase(BaseModel):
     username: str
@@ -9,6 +10,8 @@ class PlayerProgressBase(BaseModel):
 
 class PlayerProgressResponse(PlayerProgressBase):
     xp_to_next: int
+    gold: Optional[int] = 50
+    inventory: Optional[str] = "[]" 
 
     class Config:
         from_attributes = True

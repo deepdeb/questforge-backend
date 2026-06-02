@@ -12,3 +12,4 @@ class PlayerProgress(Base):
     total_xp_earned = Column(Integer, default=0)
     achievements_unlocked = Column(Integer, default=0)
     gold = Column(Integer, default=50)
+    inventory = Column(String(500), default="[]")

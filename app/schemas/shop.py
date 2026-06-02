@@ -10,3 +10,7 @@ class ShopItemResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class PurchaseRequest(BaseModel):
+    item_id: int

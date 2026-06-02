@@ -18,7 +18,6 @@ def get_progress(db: Session = Depends(get_db)):
             db.add(progress)
             db.commit()
             db.refresh(progress)
-        
         # Add computed field
         progress_dict = {
             "username": progress.username,
@@ -26,7 +25,9 @@ def get_progress(db: Session = Depends(get_db)):
             "xp": progress.xp,
             "quests_completed": progress.quests_completed,
             "total_xp_earned": progress.total_xp_earned,
-            "xp_to_next": calculate_xp_to_next(progress.level)
+            "xp_to_next": calculate_xp_to_next(progress.level),
+            "gold": progress.gold,
+            "inventory": progress.inventory
         }
         return progress_dict
     except Exception as e:
