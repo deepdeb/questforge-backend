@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.models.player import PlayerProgress
+from app.models.history import QuestHistory
 from app.schemas.player import PlayerProgressResponse
 
 router = APIRouter(prefix="/api/player", tags=["player"])
@@ -35,7 +36,7 @@ def get_progress(db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=f"Failed to get player progress: {str(e)}")
 
 @router.post("/gain-xp")
-def gain_xp(amount: int, db: Session = Depends(get_db)):
+def gain_xp(amount: int, quest_title: str = None, db: Session = Depends(get_db)):
     try:
         progress = db.query(PlayerProgress).first()
         if not progress:
@@ -45,6 +46,15 @@ def gain_xp(amount: int, db: Session = Depends(get_db)):
         progress.xp += amount
         progress.total_xp_earned += amount
         progress.quests_completed += 1
+
+        # Save to history if quest title provided
+        if quest_title:
+            history_entry = QuestHistory(
+                player_id=progress.id,
+                quest_title=quest_title,
+                xp_rewarded=amount
+            )
+            db.add(history_entry)
 
         xp_to_next = calculate_xp_to_next(progress.level)
         
@@ -64,7 +74,9 @@ def gain_xp(amount: int, db: Session = Depends(get_db)):
                 "xp": progress.xp,
                 "quests_completed": progress.quests_completed,
                 "total_xp_earned": progress.total_xp_earned,
-                "xp_to_next": calculate_xp_to_next(progress.level)
+                "xp_to_next": calculate_xp_to_next(progress.level),
+                "gold": progress.gold,
+                "inventory": progress.inventory
             }
         }
     except Exception as e:

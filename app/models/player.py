@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy.orm import relationship
 from app.core.database import Base
 
 class PlayerProgress(Base):
@@ -13,3 +14,5 @@ class PlayerProgress(Base):
     achievements_unlocked = Column(Integer, default=0)
     gold = Column(Integer, default=50)
     inventory = Column(String(500), default="[]")
+
+    history = relationship("QuestHistory", back_populates="player", cascade="all, delete-orphan")
