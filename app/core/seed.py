@@ -21,16 +21,49 @@ def seed_all_data(db: Session):
     # Seed Quests
     if db.query(Quest).count() == 0:
         quests = [
-            {"title": "Daily Login", "description": "Sign in today", "xp_reward": 25, "required_level": 1},
-            {"title": "Complete a Task", "description": "Finish any productive task", "xp_reward": 35, "required_level": 1},
-            {"title": "Write a Journal Entry", "description": "Reflect on your day", "xp_reward": 40, "required_level": 2},
-            {"title": "Learn Something New", "description": "Study for 20+ minutes", "xp_reward": 50, "required_level": 3},
-            {"title": "Exercise", "description": "Move your body", "xp_reward": 45, "required_level": 4},
+            {
+                "title": "Daily Login", 
+                "description": "Sign in today", 
+                "xp_reward": 25, 
+                "required_level": 1,
+                "quest_type": "simple"
+            },
+            {
+                "title": "Deep Work Session",
+                "description": "Focus intensely for 45+ minutes",
+                "xp_reward": 45,
+                "required_level": 2,
+                "quest_type": "choice",
+                "choices": [
+                    {"id": "focused", "text": "Pure focused work", "xp_reward": 55, "gold_reward": 15, "description": "Maximum productivity"},
+                    {"id": "balanced", "text": "Work with short breaks", "xp_reward": 40, "gold_reward": 25, "description": "Sustainable approach"}
+                ],
+                "story_context": "You sit down to do important work..."
+            },
+            {
+                "title": "Learn Something New",
+                "description": "Study a new concept or technology",
+                "xp_reward": 50,
+                "required_level": 3,
+                "quest_type": "choice",
+                "choices": [
+                    {"id": "deep_dive", "text": "Deep dive into documentation", "xp_reward": 65, "gold_reward": 10},
+                    {"id": "hands_on", "text": "Build a small example project", "xp_reward": 55, "gold_reward": 20},
+                    {"id": "teach", "text": "Explain it to someone else", "xp_reward": 60, "gold_reward": 15}
+                ]
+            },
+            {
+                "title": "Exercise",
+                "description": "Move your body",
+                "xp_reward": 45,
+                "required_level": 4,
+                "quest_type": "simple"
+            },
         ]
         for q in quests:
             db.add(Quest(**q))
         db.commit()
-        print("✅ Quests seeded")
+        print("✅ Quests seeded with choice-based content")
 
     # Seed Achievements
     if db.query(Achievement).count() == 0:
