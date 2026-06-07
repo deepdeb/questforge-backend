@@ -40,13 +40,14 @@ async def root():
 # ====================== DEVELOPMENT ONLY ======================
 @app.post("/dev/reset")
 async def dev_reset_db():
-    """Reset the entire database and reseed data (development only)."""
+    """Reset database and reseed all data"""
     success = reset_database()
     if success:
-        # Seed fresh data
-        db = next(get_db())
-        seed_all_data(db)
-        return {"status": "success", "message": "Database reset and seeded successfully!"}
-    else:
-        return {"status": "error", "message": "Database reset failed."}
+        try:
+            db = next(get_db())   # Get a database session
+            seed_all_data(db)
+            return {"status": "success", "message": "Database fully reset and seeded!"}
+        except Exception as e:
+            return {"status": "warning", "message": f"Reset done, but seeding failed: {str(e)}"}
+    return {"status": "error", "message": "Database reset failed."}
 # ==============================================================
