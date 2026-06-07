@@ -42,6 +42,7 @@ def gain_xp(amount: int, quest_title: str = None, db: Session = Depends(get_db))
         if not progress:
             progress = PlayerProgress(username="Adventurer")
             db.add(progress)
+            db.flush()
         
         progress.xp += amount
         progress.total_xp_earned += amount
